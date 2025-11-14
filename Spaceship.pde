@@ -1,6 +1,4 @@
-class Spaceship extends Floater  
-{   
-    class Spaceship extends Floater {
+class Spaceship extends Floater  {   
   public Spaceship() { 
     corners = 7;   
     xCorners = new int[corners];
@@ -32,6 +30,4 @@ class Spaceship extends Floater
     myXspeed = 0;
     myYspeed = 0;
   }
-}
-
 }
