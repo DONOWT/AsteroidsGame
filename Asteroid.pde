@@ -1,4 +1,5 @@
 class Asteroid extends Floater {
+  double orbit = (double)(Math.random()*2)-1;
   Asteroid() {
     corners = 8;
     xCorners = new int[corners];
