@@ -28,7 +28,7 @@ class Floater {
     }   
   }   
   public void show () {             
-    fill(myColor);   
+    fill(myColor,150,100);  
     stroke(myColor);    
     translate((float)myCenterX, (float)myCenterY);
     float dRadians = (float)(myPointDirection*(Math.PI/180));
