@@ -3,13 +3,12 @@ Spaceship Bob;
 ArrayList <Asteroid> theList = new ArrayList <Asteroid>();
 Asteroid someThingy;
 void setup() {
+  size(1000, 500);  
   for (int i = 0; i <= 10; i++) {
     someThingy = new Asteroid();
     theList.add(someThingy);
   }
-  size(1000, 500);
   Bob = new Spaceship();
-  size(1000, 500);
   for (int i = 0; i < nightSky.length; i++) {
     nightSky[i] = new Star();
   }
