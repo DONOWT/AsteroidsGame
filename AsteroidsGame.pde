@@ -49,7 +49,7 @@ void draw() {
   }
 }
 class Asteroid extends Floater {
-  double orbit = (double)(Math.random()*2)-1;
+  double orbit = (double)(Math.random()*10)-5;
   Asteroid() {
     corners = 8;
     xCorners = new int[corners];
@@ -75,7 +75,7 @@ class Asteroid extends Floater {
     myCenterY = (double)(Math.random()*500);
     myXspeed = (double)(Math.random()*5);
     myYspeed = (double)(Math.random()*5);
-    myPointDirection = (double)(Math.random()*360);
+    myPointDirection = (double)(Math.random()*2*PI);
   }
   public void move () {
     super.move();
