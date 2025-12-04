@@ -2,9 +2,19 @@ Star[] nightSky = new Star[1000];
 Spaceship Bob;
 ArrayList <Asteroid> theList = new ArrayList <Asteroid>();
 Asteroid someThingy;
+ArrayList <Bullet> bullets = new ArrayList <Bullet>();
+Bullet someBullet;
 void setup() {
-  size(1000, 500);  
-  for (int i = 0; i <= 10; i++) {
+  size(1000, 500);
+  textAlign(CENTER);
+  textSize(24);
+  if (bullets.size() >= 0) {
+    for (int i = 0; i < bullets.size()-1; i++) {
+      someBullet = new Bullet();
+      bullets.add(someBullet);
+    }
+  }
+  for (int i = 0; i < 20; i++) {
     someThingy = new Asteroid();
     theList.add(someThingy);
   }
@@ -34,51 +44,42 @@ void draw() {
     if (key == 'q' || key == 'Q') {
       Bob.HyperSpace();
     }
+    if (key == 32) {
+      Bullet someBullet = new Bullet();
+      bullets.add(someBullet);
+    }
+  }
+  if (Bob.myXspeed == 0 && Bob.myYspeed == 0) {
+    Bob.myColor = 0;
+  } else {
+    Bob.myColor = 255;
   }
   Bob.move();
   Bob.show();
   for (int i = 0; i < theList.size(); i++) {
     theList.get(i).move();
     theList.get(i).show();
-    if (dist((float)theList.get(i).myCenterX, (float)theList.get(i).myCenterY, (float)Bob.myCenterX, (float)Bob.myCenterY) <= 20){
-      theList.remove(i);
+  }
+  if (bullets.size() > 0) {
+    for (int a = bullets.size()-1; a >= 0; a--) {
+      for (int i = theList.size()-1; i >= 0; i--) {
+        if (dist((float)theList.get(i).myCenterX, (float)theList.get(i).myCenterY, (float)bullets.get(a).myCenterX, (float)bullets.get(a).myCenterY) <= 20){
+          theList.remove(i);
+          bullets.remove(a);
+          break;
+        } 
+      }
     }
   }
-  if (theList.size() < 1) {
-    noLoop();
+  for (int i = theList.size()-1; i >= 0; i--) {
+    if (dist((float)theList.get(i).myCenterX, (float)theList.get(i).myCenterY, (float)Bob.myCenterX, (float)Bob.myCenterY) <= 30){
+      noLoop();
+    }
   }
-}
-class Asteroid extends Floater {
-  double orbit = (double)(Math.random()*10)-5;
-  Asteroid() {
-    corners = 8;
-    xCorners = new int[corners];
-    yCorners = new int[corners];
-    xCorners[0] = (int)(myCenterX + (Math.cos(0)*(Math.random()*10+15)));
-    yCorners[0] = (int)(myCenterY);
-    xCorners[1] = (int)(myCenterX + (Math.cos(PI/4)*(Math.random()*10+15)));
-    yCorners[1] = (int)(myCenterY + (Math.sin(PI/4)*(Math.random()*10+15)));
-    xCorners[2] = (int)(myCenterX);
-    yCorners[2] = (int)(myCenterY + (Math.sin(PI/2)*(Math.random()*10+15)));
-    xCorners[3] = (int)(myCenterX + (Math.cos(3*PI/4)*(Math.random()*10+15)));
-    yCorners[3] = (int)(myCenterY + (Math.sin(3*PI/4)*(Math.random()*10+15)));
-    xCorners[4] = (int)(myCenterX + (Math.cos(PI)*(Math.random()*10+15)));
-    yCorners[4] = (int)(myCenterY);
-    xCorners[5] = (int)(myCenterX + (Math.cos(5*PI/4)*(Math.random()*10+15)));
-    yCorners[5] = (int)(myCenterY + (Math.sin(5*PI/4)*(Math.random()*10+15)));
-    xCorners[6] = (int)(myCenterX);
-    yCorners[6] = (int)(myCenterY + (Math.sin(3*PI/2)*(Math.random()*10+15)));
-    xCorners[7] = (int)(myCenterX + (Math.cos(7*PI/4)*(Math.random()*10+15)));
-    yCorners[7] = (int)(myCenterY + (Math.sin(7*PI/4)*(Math.random()*10+15)));
-    myColor = 150;
-    myCenterX = (double)(Math.random()*1000);
-    myCenterY = (double)(Math.random()*500);
-    myXspeed = (double)(Math.random()*10-5);
-    myYspeed = (double)(Math.random()*10-5);
-    myPointDirection = (double)(Math.random()*360);
+  for (int i = 0; i < bullets.size(); i++) {
+    bullets.get(i).move();
+    bullets.get(i).show();
   }
-  public void move () {
-    super.move();
-    super.turn(orbit);
-  }
+  if (theList.size() <= 0) {noLoop();}
+  text(theList.size(), (float)Bob.myCenterX, (float)Bob.myCenterY - 30);
 }
