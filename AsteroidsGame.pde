@@ -1,3 +1,4 @@
+int health = 5;
 Star[] nightSky = new Star[1000];
 Spaceship Bob;
 ArrayList <Asteroid> theList = new ArrayList <Asteroid>();
