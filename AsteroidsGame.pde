@@ -64,7 +64,7 @@ void draw() {
   if (bullets.size() > 0) {
     for (int a = bullets.size()-1; a >= 0; a--) {
       for (int i = theList.size()-1; i >= 0; i--) {
-        if (dist((float)theList.get(i).myCenterX, (float)theList.get(i).myCenterY, (float)bullets.get(a).myCenterX, (float)bullets.get(a).myCenterY) <= 20){
+        if (dist((float)theList.get(i).getX(), (float)theList.get(i).getY(), (float)bullets.get(a).getX(), (float)bullets.get(a).getY()) <= 20){
           theList.remove(i);
           bullets.remove(a);
           break;
@@ -73,7 +73,7 @@ void draw() {
     }
   }
   for (int i = theList.size()-1; i >= 0; i--) {
-    if (dist((float)theList.get(i).myCenterX, (float)theList.get(i).myCenterY, (float)Bob.myCenterX, (float)Bob.myCenterY) <= 30){
+    if (dist((float)theList.get(i).getX(), (float)theList.get(i).getY(), (float)Bob.getX(), (float)Bob.getY()) <= 30){
       noLoop();
     }
   }
@@ -82,5 +82,5 @@ void draw() {
     bullets.get(i).show();
   }
   if (theList.size() <= 0) {noLoop();}
-  text(theList.size(), (float)Bob.myCenterX, (float)Bob.myCenterY - 30);
+  text(theList.size(), (float)Bob.getX(), (float)Bob.getY() - 30);
 }
