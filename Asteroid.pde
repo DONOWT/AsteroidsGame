@@ -31,4 +31,6 @@ class Asteroid extends Floater {
     super.move();
     super.turn(orbit);
   }
+  public double getX() {return myCenterX;}
+  public double getY() {return myCenterY;}
 }
